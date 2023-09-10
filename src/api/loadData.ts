@@ -1,3 +1,5 @@
+import getChartData from "@/utils/getChartData";
+
 const loadData = async () => {
   try {
     const response = await fetch("/data.json");
@@ -5,7 +7,8 @@ const loadData = async () => {
       throw new Error("데이터 로딩에 실패했습니다.");
     }
     const data = await response.json();
-    return data.response;
+    const responseData = data.response;
+    return getChartData(responseData);
   } catch (error) {
     console.error(error);
   }
