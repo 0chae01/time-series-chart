@@ -27,17 +27,22 @@ const Chart = ({
   selectRegion,
   selectValueType,
 }: ChartProps) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<chartDataType[]>();
   const fetchedData = useLoaderData() as chartDataType[];
 
   useEffect(() => {
     console.log(region, valueType, selectRegion, selectValueType);
     setData(fetchedData);
+    setIsLoading(false);
   }, []);
 
+  if (!data) return null;
   return (
     <Container>
-      {data ? (
+      {isLoading ? (
+        "Loading..."
+      ) : (
         <ResponsiveContainer width={"100%"} height={500}>
           <ComposedChart
             data={data}
@@ -81,11 +86,17 @@ const Chart = ({
               barSize={10}
               fill="#ffb700"
               yAxisId="right"
+              cursor="pointer"
             >
-              {data.map((_entry, index) => (
+              {data.map((entry, index) => (
                 <Cell
+                  fill={entry.id === region ? "#ff6200" : "#ffb700"}
                   key={`cell-${index}`}
-                  fill={index === 2 ? "#ff6200" : "#ffb700"}
+                  onClick={() =>
+                    entry.id === region
+                      ? selectRegion("전체")
+                      : selectRegion(entry.id)
+                  }
                 />
               ))}
             </Bar>
@@ -99,7 +110,7 @@ const Chart = ({
             <Legend height={50} margin={{ top: 100 }} />
           </ComposedChart>
         </ResponsiveContainer>
-      ) : null}
+      )}
     </Container>
   );
 };
