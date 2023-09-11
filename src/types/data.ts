@@ -11,4 +11,5 @@ export interface chartDataType {
   value_area: number;
   value_bar: number;
   time: string;
+  date: string;
 }
