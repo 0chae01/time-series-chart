@@ -1,3 +1,25 @@
 .recharts-legend-item {
   cursor: pointer;
 }
+
+.tooltip {
+  background-color: white;
+  opacity: 0.9;
+  padding: 4px 10px;
+  border: 0.8px solid lightgray;
+  border-radius: 5%;
+}
+
+.tooltip--region {
+  margin: 4px 0;
+  padding: 0;
+}
+
+.tooltip--value-wrapper {
+  margin: 0;
+  padding: 0 4px;
+}
+
+.tooltip--value {
+  margin: 4px 0;
+}

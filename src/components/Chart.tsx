@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import { chartDataType } from "@/types/data";
 import {
   ComposedChart,
@@ -11,8 +11,11 @@ import {
   Area,
   Cell,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 import styled from "styled-components";
+import CustomizedDot from "./CustomizedDot";
+import CustomizedToolTip from "./CustomizedToolTip";
 
 interface ChartProps {
   region: string;
@@ -30,6 +33,8 @@ const Chart = ({
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<chartDataType[]>();
   const fetchedData = useLoaderData() as chartDataType[];
+  const [searchParams, _setSearchParams] = useSearchParams();
+  const [dotRegion, setDotRegion] = useState("");
 
   useEffect(() => {
     setData(fetchedData);
@@ -80,12 +85,21 @@ const Chart = ({
                 offset: -10,
               }}
             />
+            <Tooltip
+              content={
+                <CustomizedToolTip
+                  setDotRegion={setDotRegion}
+                  active={false}
+                  valueType={valueType}
+                  payload={[]}
+                />
+              }
+            />
             <Bar
               dataKey="value_bar"
               barSize={10}
               fill="#ffb700"
               yAxisId="right"
-              cursor="pointer"
             >
               {data.map((entry, index) => (
                 <Cell
@@ -106,6 +120,19 @@ const Chart = ({
               stroke="#9ebefe"
               yAxisId="left"
               legendType="circle"
+              dot={
+                <CustomizedDot
+                  cx={2}
+                  cy={2}
+                  fill={"#252dbd"}
+                  region={dotRegion}
+                />
+              }
+              onClick={() =>
+                selectRegion(
+                  searchParams.get("region") === dotRegion ? "전체" : dotRegion
+                )
+              }
             />
             <Legend
               height={50}
