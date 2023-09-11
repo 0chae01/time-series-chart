@@ -14,8 +14,8 @@ import {
   Tooltip,
 } from "recharts";
 import styled from "styled-components";
-import CustomizedDot from "./CustomizedDot";
-import CustomizedToolTip from "./CustomizedToolTip";
+import CustomDot from "./CustomDot";
+import CustomToolTip from "./CustomToolTip";
 
 interface ChartProps {
   region: string;
@@ -85,16 +85,7 @@ const Chart = ({
                 offset: -10,
               }}
             />
-            <Tooltip
-              content={
-                <CustomizedToolTip
-                  setDotRegion={setDotRegion}
-                  active={false}
-                  valueType={valueType}
-                  payload={[]}
-                />
-              }
-            />
+            <Tooltip content={<CustomToolTip setDotRegion={setDotRegion} />} />
             <Bar
               dataKey="value_bar"
               barSize={10}
@@ -117,17 +108,10 @@ const Chart = ({
               type="monotone"
               dataKey="value_area"
               fill="#b3c5ff"
-              stroke="#9ebefe"
+              stroke="#277fe4"
               yAxisId="left"
               legendType="circle"
-              dot={
-                <CustomizedDot
-                  cx={2}
-                  cy={2}
-                  fill={"#252dbd"}
-                  region={dotRegion}
-                />
-              }
+              dot={<CustomDot />}
               onClick={() =>
                 selectRegion(
                   searchParams.get("region") === dotRegion ? "전체" : dotRegion
