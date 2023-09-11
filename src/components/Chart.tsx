@@ -32,7 +32,6 @@ const Chart = ({
   const fetchedData = useLoaderData() as chartDataType[];
 
   useEffect(() => {
-    console.log(region, valueType, selectRegion, selectValueType);
     setData(fetchedData);
     setIsLoading(false);
   }, []);
@@ -106,8 +105,14 @@ const Chart = ({
               fill="#b3c5ff"
               stroke="#9ebefe"
               yAxisId="left"
+              legendType="circle"
             />
-            <Legend height={50} margin={{ top: 100 }} />
+            <Legend
+              height={50}
+              margin={{ top: 100 }}
+              onClick={(legend) => selectValueType(legend.value)}
+              cursor={"pointer"}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       )}
