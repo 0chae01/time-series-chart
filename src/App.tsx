@@ -16,7 +16,10 @@ function App() {
 
   const regions = [...new Set(fetchedData.map((data) => data.id))].sort();
 
+  const invalidQuery = curQueryData.find((query) => !regions.includes(query));
+
   useEffect(() => {
+    if (invalidQuery) resetFilter();
     setData(fetchedData);
     setIsLoading(false);
   }, []);
