@@ -95,7 +95,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             }}
             domain={[0, 20000]}
           />
-          <Tooltip content={<CustomToolTip />} />
+          <Tooltip content={<CustomToolTip />} animationDuration={200} />
           <Bar
             dataKey="value_bar"
             barSize={20}
@@ -122,6 +122,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             dot={<CustomDot />}
             activeDot={{ fill: "red" }}
             hide={hiddenValue === "value_area"}
+            animationDuration={300}
           />
           <Legend
             height={50}
