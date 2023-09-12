@@ -15,7 +15,6 @@ import {
 } from "recharts";
 import CustomDot from "./CustomDot";
 import CustomToolTip from "./CustomToolTip";
-import useQueryParams from "@/hooks/useQueryParams";
 import {
   CategoricalChartFunc,
   CategoricalChartState,
@@ -23,12 +22,12 @@ import {
 
 interface ChartProps {
   data: chartDataType[];
+  curQueryData: string[];
+  toggleFilter: (id: string) => void;
 }
 
-const Chart = ({ data }: ChartProps) => {
+const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
   const [hiddenValue, setHiddenValue] = useState("");
-
-  const { curQueryData, toggleFilter } = useQueryParams("region");
 
   const onClick = (e: CategoricalChartState) => {
     if (e && e.activePayload) {
