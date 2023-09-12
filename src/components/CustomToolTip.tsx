@@ -9,16 +9,20 @@ const CustomToolTip = ({ active, payload }: TooltipProps<number, string>) => {
         <div className="tooltip--value-wrapper">
           <p className="tooltip--value">
             {"time: "}
-            <span>{`${bar.payload.time}`}</span>
+            <span>{`${payload[0].payload.time}`}</span>
           </p>
-          <p className="tooltip--value">
-            {`${bar.dataKey}: `}
-            <span>{`${bar.value}`}</span>
-          </p>
-          <p className="tooltip--value">
-            {`${area.dataKey}: `}
-            <span>{`${area.value}`}</span>
-          </p>
+          {bar && bar.dataKey && (
+            <p className="tooltip--value">
+              {`${bar.dataKey}: `}
+              <span>{`${bar.value}`}</span>
+            </p>
+          )}
+          {area && area.dataKey && (
+            <p className="tooltip--value">
+              {`${area.dataKey}: `}
+              <span>{`${area.value}`}</span>
+            </p>
+          )}
         </div>
       </div>
     );

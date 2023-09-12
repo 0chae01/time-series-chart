@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { useLoaderData } from "react-router-dom";
 import { chartDataType } from "@/types/data";
 import {
@@ -12,48 +13,49 @@ import {
   Cell,
   ResponsiveContainer,
   Tooltip,
+  AreaProps,
 } from "recharts";
-import styled from "styled-components";
 import CustomDot from "./CustomDot";
 import CustomToolTip from "./CustomToolTip";
 import useQueryParams from "@/hooks/useQueryParams";
-import { CategoricalChartFunc } from "recharts/types/chart/generateCategoricalChart";
+import {
+  CategoricalChartFunc,
+  CategoricalChartState,
+} from "recharts/types/chart/generateCategoricalChart";
 
-interface ChartProps {
-  region: string;
-  valueType: string;
-  selectRegion: (region: string) => void;
-  selectValueType: (valueType: string) => void;
-}
-
-const Chart = ({
-  region,
-  valueType,
-  selectRegion,
-  selectValueType,
-}: ChartProps) => {
+const Chart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<chartDataType[]>();
+  const [hiddenValue, setHiddenValue] = useState("");
+
   const fetchedData = useLoaderData() as chartDataType[];
 
   useEffect(() => {
-    console.log(region, valueType, selectRegion, selectValueType);
     setData(fetchedData);
     setIsLoading(false);
   }, []);
 
   const { curQueryData, toggleFilter } = useQueryParams("region");
 
-  const onClick = ({
-    activePayload,
-  }: {
-    activePayload: { payload: chartDataType }[];
-  }) => {
-    const payload = activePayload[0].payload;
+  const onClick = (e: CategoricalChartState) => {
+    if (e && e.activePayload) {
+      const payload = e.activePayload[0].payload;
 
-    if (payload.id) {
-      toggleFilter(payload.id);
+      if (payload.id) {
+        toggleFilter(payload.id);
+      }
     }
+  };
+
+  const toggleValueType = (e: AreaProps) => {
+    const selectedValue = e.dataKey as string;
+    if (hiddenValue === "") {
+      return setHiddenValue(selectedValue as string);
+    }
+    if (hiddenValue === selectedValue) {
+      return setHiddenValue("");
+    }
+    setHiddenValue(selectedValue);
   };
 
   if (!data) return null;
@@ -100,6 +102,7 @@ const Chart = ({
                 position: "insideRight",
                 offset: -10,
               }}
+              domain={[0, 20000]}
             />
             <Tooltip content={<CustomToolTip />} />
             <Bar
@@ -107,12 +110,12 @@ const Chart = ({
               barSize={10}
               fill="#ffb700"
               yAxisId="right"
+              hide={hiddenValue === "value_bar"}
             >
               {data.map((entry, index) => (
                 <Cell
                   fill={curQueryData.includes(entry.id) ? "#ff6200" : "#ffb700"}
                   key={`cell-${index}`}
-                  // onClick={() => toggleFilter(entry.id)}
                 />
               ))}
             </Bar>
@@ -124,9 +127,14 @@ const Chart = ({
               yAxisId="left"
               legendType="circle"
               dot={<CustomDot />}
-              // onClick={() => toggleFilter(dotRegion)}
+              activeDot={{ fill: "red" }}
+              hide={hiddenValue === "value_area"}
             />
-            <Legend height={50} margin={{ top: 100 }} />
+            <Legend
+              height={50}
+              margin={{ top: 100 }}
+              onClick={(data) => toggleValueType(data)}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       )}
