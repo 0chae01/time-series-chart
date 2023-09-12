@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { chartDataType } from "@/types/data";
 import {
   ComposedChart,
@@ -16,6 +16,8 @@ import {
 import styled from "styled-components";
 import CustomDot from "./CustomDot";
 import CustomToolTip from "./CustomToolTip";
+import useQueryParams from "@/hooks/useQueryParams";
+import { CategoricalChartFunc } from "recharts/types/chart/generateCategoricalChart";
 
 interface ChartProps {
   region: string;
@@ -33,13 +35,26 @@ const Chart = ({
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<chartDataType[]>();
   const fetchedData = useLoaderData() as chartDataType[];
-  const [searchParams, _setSearchParams] = useSearchParams();
-  const [dotRegion, setDotRegion] = useState("");
 
   useEffect(() => {
+    console.log(region, valueType, selectRegion, selectValueType);
     setData(fetchedData);
     setIsLoading(false);
   }, []);
+
+  const { curQueryData, toggleFilter } = useQueryParams("region");
+
+  const onClick = ({
+    activePayload,
+  }: {
+    activePayload: { payload: chartDataType }[];
+  }) => {
+    const payload = activePayload[0].payload;
+
+    if (payload.id) {
+      toggleFilter(payload.id);
+    }
+  };
 
   if (!data) return null;
   return (
@@ -56,6 +71,7 @@ const Chart = ({
               bottom: 20,
               left: 10,
             }}
+            onClick={onClick as CategoricalChartFunc}
           >
             <CartesianGrid stroke="#f5f5f5" />
             <XAxis
@@ -85,7 +101,7 @@ const Chart = ({
                 offset: -10,
               }}
             />
-            <Tooltip content={<CustomToolTip setDotRegion={setDotRegion} />} />
+            <Tooltip content={<CustomToolTip />} />
             <Bar
               dataKey="value_bar"
               barSize={10}
@@ -94,13 +110,9 @@ const Chart = ({
             >
               {data.map((entry, index) => (
                 <Cell
-                  fill={entry.id === region ? "#ff6200" : "#ffb700"}
+                  fill={curQueryData.includes(entry.id) ? "#ff6200" : "#ffb700"}
                   key={`cell-${index}`}
-                  onClick={() =>
-                    entry.id === region
-                      ? selectRegion("전체")
-                      : selectRegion(entry.id)
-                  }
+                  // onClick={() => toggleFilter(entry.id)}
                 />
               ))}
             </Bar>
@@ -112,18 +124,9 @@ const Chart = ({
               yAxisId="left"
               legendType="circle"
               dot={<CustomDot />}
-              onClick={() =>
-                selectRegion(
-                  searchParams.get("region") === dotRegion ? "전체" : dotRegion
-                )
-              }
+              // onClick={() => toggleFilter(dotRegion)}
             />
-            <Legend
-              height={50}
-              margin={{ top: 100 }}
-              onClick={(legend) => selectValueType(legend.value)}
-              cursor={"pointer"}
-            />
+            <Legend height={50} margin={{ top: 100 }} />
           </ComposedChart>
         </ResponsiveContainer>
       )}

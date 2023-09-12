@@ -16,7 +16,7 @@ const CustomDot = ({
 
   return (
     <>
-      {searchParams.get("region") === payload.id ? (
+      {searchParams.getAll("region")?.includes(payload.id) ? (
         <circle
           cx={cx}
           cy={cy}

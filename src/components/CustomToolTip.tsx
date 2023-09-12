@@ -1,14 +1,6 @@
-import { Dispatch, useEffect } from "react";
 import { TooltipProps } from "recharts";
 
-interface props extends TooltipProps<number, string> {
-  setDotRegion: Dispatch<React.SetStateAction<string>>;
-}
-const CustomToolTip = ({ active, payload, setDotRegion }: props) => {
-  useEffect(() => {
-    if (payload && payload.length) setDotRegion(payload[0].payload.id);
-  }, [payload]);
-
+const CustomToolTip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     const [bar, area] = payload;
     return (
