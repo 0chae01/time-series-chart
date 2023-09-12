@@ -1,7 +1,7 @@
 .filter-area {
   display: flex;
-  margin-left: 30px;
-  margin-bottom: 10px;
+  margin-left: 35px;
+  margin-bottom: -25px;
   display: flex;
   align-items: center;
 }
@@ -17,6 +17,7 @@ button {
   background-color: white;
   border: 1px solid rgb(197, 197, 197);
   border-radius: 4px;
+  z-index: 99999;
 }
 
 button.active {
@@ -35,10 +36,19 @@ button.reset {
   height: fit-content;
 }
 
-.guide {
+.filter-guide {
+  margin: 0 5px;
+  color: gray;
+  font-size: 12px;
+}
+
+p.graph-guide {
   margin: 0 10px;
   color: gray;
   font-size: 12px;
+  text-align: end;
+  margin: 0 30px;
+  margin-bottom: -15px;
 }
 
 .recharts-legend-item {

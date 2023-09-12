@@ -38,7 +38,7 @@ function App() {
             ╳ 필터 초기화
           </button>
         ) : (
-          <p className="guide">◀︎◀︎ 지역 필터를 선택하세요</p>
+          <p className="filter-guide">◀︎ 지역 필터를 선택하세요</p>
         )}
       </div>
       {isLoading ? (
