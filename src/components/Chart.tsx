@@ -72,6 +72,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             height={70}
             tickMargin={5}
             tickSize={15}
+            angle={-20}
           />
           <YAxis
             yAxisId="left"
