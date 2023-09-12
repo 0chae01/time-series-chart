@@ -4,6 +4,7 @@ import { chartDataType } from "@/types/data";
 import Chart from "@/components/Chart";
 import Button from "@/components/Button";
 import useQueryParams from "@/hooks/useQueryParams";
+import Header from "@/components/Header";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <div className="filter-area">
         {regions.map((region, idx) => (
           <Button

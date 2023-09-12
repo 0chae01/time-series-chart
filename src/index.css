@@ -1,3 +1,17 @@
+body {
+  min-width: 1024px;
+  box-sizing: border-box;
+}
+
+header {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 20px;
+  margin: 30px 30px 10px;
+  border-bottom: 1px solid rgb(197, 197, 197);
+}
+
 .filter-area {
   display: flex;
   margin-left: 35px;
