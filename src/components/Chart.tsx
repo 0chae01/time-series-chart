@@ -98,13 +98,15 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
           <Bar
             dataKey="value_bar"
             barSize={20}
-            fill="#ffb700"
+            fill="#ffc53dd9"
             yAxisId="right"
             hide={hiddenValue === "value_bar"}
           >
             {data.map((entry, index) => (
               <Cell
-                fill={curQueryData.includes(entry.id) ? "#ff6200" : "#ffb700"}
+                fill={
+                  curQueryData.includes(entry.id) ? "#ff6200d9" : "#ffc53dd9"
+                }
                 key={`cell-${index}`}
               />
             ))}
