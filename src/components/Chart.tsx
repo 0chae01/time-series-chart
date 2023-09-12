@@ -64,7 +64,7 @@ const Chart = () => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <ResponsiveContainer width={"100%"} height={500}>
+        <ResponsiveContainer width={"100%"} height={600}>
           <ComposedChart
             data={data}
             margin={{
