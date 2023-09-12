@@ -22,7 +22,7 @@ const CustomDot = ({
           cy={cy}
           r={3}
           stroke="#fff"
-          fill="#277fe4"
+          fill="#ff6200"
           strokeWidth={1}
         />
       ) : null}
