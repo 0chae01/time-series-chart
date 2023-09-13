@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   AreaProps,
+  Brush,
 } from "recharts";
 import CustomDot from "./CustomDot";
 import CustomToolTip from "./CustomToolTip";
@@ -130,6 +131,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             align="right"
             verticalAlign="top"
           />
+          <Brush dataKey="time" height={30} stroke="gray" travellerWidth={10} />
         </ComposedChart>
       </ResponsiveContainer>
     </>
