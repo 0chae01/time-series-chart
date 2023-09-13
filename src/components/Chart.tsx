@@ -29,6 +29,7 @@ interface ChartProps {
 
 const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
   const [hiddenValue, setHiddenValue] = useState("");
+  const [startIndex, setStartIndex] = useState(0);
 
   const onClick = (e: CategoricalChartState) => {
     if (e && e.activePayload) {
@@ -104,7 +105,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             yAxisId="right"
             hide={hiddenValue === "value_bar"}
           >
-            {data.map((entry, index) => (
+            {data.slice(startIndex).map((entry, index) => (
               <Cell
                 fill={
                   curQueryData.includes(entry.id) ? "#ff6200d9" : "#ffc53dd9"
@@ -131,7 +132,13 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             align="right"
             verticalAlign="top"
           />
-          <Brush dataKey="time" height={30} stroke="gray" travellerWidth={10} />
+          <Brush
+            dataKey="time"
+            height={30}
+            stroke="gray"
+            travellerWidth={10}
+            onChange={(e) => setStartIndex(e.startIndex as number)}
+          />
         </ComposedChart>
       </ResponsiveContainer>
     </>
