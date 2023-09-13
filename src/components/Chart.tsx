@@ -88,9 +88,10 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
               angle: -90,
               position: "insideLeft",
               offset: 1,
-              fill: "#277fe4",
+              fill: hiddenValue === "value_area" ? "#fff" : "#277fe4",
             }}
             domain={[0, 200]}
+            opacity={hiddenValue === "value_area" ? 0 : 1}
           />
           <YAxis
             yAxisId="right"
@@ -100,9 +101,10 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
               angle: 90,
               position: "insideRight",
               offset: -10,
-              fill: "#ffc53d",
+              fill: hiddenValue === "value_bar" ? "#fff" : "#ffc53d",
             }}
             domain={[0, 20000]}
+            opacity={hiddenValue === "value_bar" ? 0 : 1}
           />
           <Tooltip content={<CustomToolTip />} animationDuration={200} />
           <Bar
