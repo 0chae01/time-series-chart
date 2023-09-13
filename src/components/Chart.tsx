@@ -75,6 +75,11 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
             tickMargin={5}
             tickSize={15}
             angle={-20}
+            label={{
+              value: "TIME: 2023-02-01",
+              position: "insideBottomLeft",
+              offset: 10,
+            }}
           />
           <YAxis
             yAxisId="left"
