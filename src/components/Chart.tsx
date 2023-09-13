@@ -83,6 +83,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
               angle: -90,
               position: "insideLeft",
               offset: 1,
+              fill: "#277fe4",
             }}
             domain={[0, 200]}
           />
@@ -94,6 +95,7 @@ const Chart = ({ data, curQueryData, toggleFilter }: ChartProps) => {
               angle: 90,
               position: "insideRight",
               offset: -10,
+              fill: "#ffc53d",
             }}
             domain={[0, 20000]}
           />
