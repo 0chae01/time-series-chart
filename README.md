@@ -20,13 +20,6 @@ $ npm start
 
 https://time-series-chart-0chae01.vercel.app
 
-## 구현 화면
-
-<div align="center" >
-  
-</div>
-
-
 ## 주요 기능
 
 #### 1. 시계열 차트
@@ -48,9 +41,23 @@ https://time-series-chart-0chae01.vercel.app
 - 필터 초기화 버튼으로 적용된 모든 필터를 제거할 수 있습니다.
 - Bar 그래프 또는 Area 그래프를 개별로 볼 수 있도록 그래프 타입 지정이 가능합니다.(그래프 우측 상단)
 
-### +. 그래프 줌 기능
+#### +. 그래프 줌 기능
 
 - 차트 하단의 브러시를 이용해 원하는 만큼의 데이터 범위를 탐색할 수 있습니다.
+
+## 구현 화면
+
+<div align="center">
+  
+https://github.com/0chae01/time-series-chart/assets/124250465/05e26735-e2d0-4892-ba0d-da442ef0fb4a
+
+https://github.com/0chae01/time-series-chart/assets/124250465/b7f0b1f8-daf7-4e44-9290-5f029218e759
+
+https://github.com/0chae01/time-series-chart/assets/124250465/eafad6b3-7027-49a7-8168-2078dd61b185
+
+https://github.com/0chae01/time-series-chart/assets/124250465/a35c6612-df93-468a-96be-cae20263de1d
+
+</div>
 
 ## 디렉토리 구조
 
