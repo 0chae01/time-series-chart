@@ -1,5 +1,8 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans", Inter, system-ui, Avenir, Helvetica, sans-serif;
+}
+button {
+  font-family: "Noto Sans", Inter, system-ui, Avenir, Helvetica, sans-serif;
 }
 
 body {
